@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.Json;
 using SmallestCSV;
 
@@ -69,7 +70,7 @@ public class SmallestCSVParserTest
     [TestMethod]
     public void TestErrorQuoteEOF() {
         string data = "\"this_field_is_not_terminated_by_quote";
-        using var mem = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(data));
+        using var mem = new MemoryStream(Encoding.UTF8.GetBytes(data));
         using var sr = new StreamReader(mem);
         var parser = new SmallestCSVParser(sr);
         var e = Assert.ThrowsException<SmallestCSVParser.Error>(() => parser.ReadNextRow());
@@ -79,7 +80,7 @@ public class SmallestCSVParserTest
     [TestMethod]
     public void TestErrorUnknownChar() {
         string data = "\"this_field_has_garbage_after\" ";
-        using var mem = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(data));
+        using var mem = new MemoryStream(Encoding.UTF8.GetBytes(data));
         using var sr = new StreamReader(mem);
         var parser = new SmallestCSVParser(sr);
         var e = Assert.ThrowsException<SmallestCSVParser.Error>(() => parser.ReadNextRow());
@@ -89,7 +90,7 @@ public class SmallestCSVParserTest
     [TestMethod]
     public void TestEOFAfterField() {
         string data = "abc,this_is_terminated_by_eof";
-        using var mem = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(data));
+        using var mem = new MemoryStream(Encoding.UTF8.GetBytes(data));
         using var sr = new StreamReader(mem);
 
         var parser = new SmallestCSVParser(sr);
