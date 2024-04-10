@@ -20,8 +20,8 @@ while (true) {
 You can easily create your own high level DictReader or whatever extravagance
 you want, for example supporting an Excel "column groups feature" (multiple
 headers having the same name, and/or headers with empty names that are expected
-to inherit the previous header's name), which is very far outside the scope of
-RFC4180.
+to inherit the previous header's name), or mapping "NA" and "N/A" to null, etc.,
+which is very far outside the scope of RFC4180.
 
 Links:
 * [Unit Tests](SmallestCSVParserTests/UnitTest1.cs)
