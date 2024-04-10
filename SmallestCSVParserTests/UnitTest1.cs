@@ -86,6 +86,21 @@ public class SmallestCSVParserTest
         Assert.AreEqual("Unrecognized character ' ' after a parsed column", e.Message);
     }
 
+    [TestMethod]
+    public void TestEOFAfterField() {
+        string data = "abc,this_is_terminated_by_eof";
+        using var mem = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(data));
+        using var sr = new StreamReader(mem);
+
+        var parser = new SmallestCSVParser(sr);
+        var columns = parser.ReadNextRow();
+        Assert.IsNotNull(columns);
+        Assert.AreEqual(2, columns.Count());
+        Assert.AreEqual("abc", columns[0]);
+        Assert.AreEqual("this_is_terminated_by_eof", columns[1]);
+        Assert.IsNull(parser.ReadNextRow());
+    }
+
     private void printRow(int rowNum, List<string> columns) {
         Console.WriteLine($"-- Read row {rowNum}");
         for (var i = 0; i < columns.Count(); i++) {
