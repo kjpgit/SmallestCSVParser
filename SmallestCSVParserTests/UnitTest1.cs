@@ -108,8 +108,8 @@ public class SmallestCSVParserTest
         }
     }
 
-    private string escapeText(string? s) {
-        return JsonSerializer.Serialize(s) ?? "(null)";
+    private string escapeText(string s) {
+        return JsonSerializer.Serialize(s);
     }
 
 }
