@@ -26,7 +26,7 @@ public class SmallestCSVParserTest
         for (int i = 0; i < expected.Length; i++) {
             var columns = parser.ReadNextRow();
             Assert.IsNotNull(columns);
-            printRow(i+1, columns);
+            printRow(i, columns);
             Assert.AreEqual(expected[i].Length, columns.Count(), "count mismatch");
             for (var j = 0; j < columns.Count(); j++) {
                 Assert.AreEqual(expected[i][j], columns[j], "row mismatch");
@@ -56,7 +56,7 @@ public class SmallestCSVParserTest
         for (int i = 0; i < expected.Length; i++) {
             var columns = parser.ReadNextRow(removeEnclosingQuotes:false);
             Assert.IsNotNull(columns);
-            printRow(i+1, columns);
+            printRow(i, columns);
             Assert.AreEqual(expected[i].Length, columns.Count(), "count mismatch");
             for (var j = 0; j < columns.Count(); j++) {
                 Assert.AreEqual(expected[i][j], columns[j], "row mismatch");
