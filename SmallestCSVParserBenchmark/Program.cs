@@ -15,7 +15,7 @@ public class SmallestCSVParserBenchmark
         while (parser.ReadNextRow() != null) {
             rows++;
         }
-        Trace.Assert(rows == 550);
+        Trace.Assert(rows == 32);
     }
 
     [Benchmark]
@@ -26,7 +26,7 @@ public class SmallestCSVParserBenchmark
         while (parser.ReadNextRow() != null) {
             rows++;
         }
-        Trace.Assert(rows == 550);
+        Trace.Assert(rows == 32);
     }
 }
 
