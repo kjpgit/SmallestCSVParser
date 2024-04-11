@@ -15,7 +15,18 @@ public class SmallestCSVParserBenchmark
         while (parser.ReadNextRow() != null) {
             rows++;
         }
-        Trace.Assert(rows == 6);
+        Trace.Assert(rows == 550);
+    }
+
+    [Benchmark]
+    public void ReadCSV2() {
+        using var sr = new StreamReader("performance1.csv");
+        var parser = new SmallestCSVParser2(sr);
+        var rows = 0;
+        while (parser.ReadNextRow() != null) {
+            rows++;
+        }
+        Trace.Assert(rows == 550);
     }
 }
 
