@@ -5,8 +5,6 @@ using SmallestCSV;
 [TestClass]
 public class SmallestCSVParserTest
 {
-    public record ReadNextColumnResponse(string? column, bool hasMore);
-
     [TestMethod]
     public void Test1() {
         using var sr = new StreamReader("test1.csv");
