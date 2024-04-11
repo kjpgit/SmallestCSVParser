@@ -4,6 +4,13 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <PackageId>SmallestCSVParser</PackageId>
+    <Version>1.1.0-pre1</Version>
+    <Authors>Karl Pickett</Authors>
+    <PackageTags>CSV,Utilities</PackageTags>
+    <PackageProjectUrl>https://github.com/kjpgit/SmallestCSVParser/</PackageProjectUrl>
+    <Description>World's Smallest CSV Parser.  A low-level parser for CSV / RFC 4180 files.</Description>
   </PropertyGroup>
 
 </Project>

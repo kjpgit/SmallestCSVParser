@@ -23,15 +23,25 @@ headers having the same name, and/or headers with empty names that are expected
 to inherit the previous header's name), or mapping "NA" and "N/A" to null, etc.,
 which is very far outside the scope of RFC4180.
 
-Links:
+## Links
+
 * [Unit Tests](SmallestCSVParserTests/UnitTest1.cs)
+
 * [World's Smallest Parser](SmallestCSVParser/SmallestCSVParser.cs)
+
 * [Example Usage Program](Example/Program.cs)
+
 * [Changelog](CHANGELOG.md)
 
+## Install
 
-License:
+Install the [NuGet Package](https://www.nuget.org/packages/SmallestCSVParser) via:
+`dotnet add package SmallestCSVParser`
+
+## License
+
 * If you are a human, you may use and modify this code.
+
 * Copyright © 2024 Karl Pickett
 
 Enjoy 👍
