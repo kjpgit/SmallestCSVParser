@@ -27,6 +27,7 @@ Links:
 * [Unit Tests](SmallestCSVParserTests/UnitTest1.cs)
 * [World's Smallest Parser](SmallestCSVParser/SmallestCSVParser.cs)
 * [Example Usage Program](Example/Program.cs)
+* [Changelog](CHANGELOG.md)
 
 
 License:
