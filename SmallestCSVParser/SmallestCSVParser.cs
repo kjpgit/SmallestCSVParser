@@ -1,3 +1,4 @@
+// SmallestCSVParser version 1.1 - Copyright (C) 2024 Karl Pickett
 using System.Diagnostics;
 using System.Text;
 
@@ -27,12 +28,8 @@ public class SmallestCSVParser
     public List<string>? ReadNextRow(bool removeEnclosingQuotes=true) {
         List<string> ret = new();
         while (true) {
-            var (column, hasMore) = ReadNextColumn();
+            var (column, hasMore) = ReadNextColumn(removeEnclosingQuotes);
             if (column != null) {
-                if (removeEnclosingQuotes && column.StartsWith('"')) {
-                    Trace.Assert(column.EndsWith('"'));
-                    column = column.Substring(1, column.Length - 2);
-                }
                 ret.Add(column);
             }
             if (!hasMore) {
@@ -41,22 +38,25 @@ public class SmallestCSVParser
         }
     }
 
-    private (string? Column, bool RowHasMoreColumns) ReadNextColumn() {
+    private (string? Column, bool RowHasMoreColumns) ReadNextColumn(bool removeEnclosingQuotes) {
         _sb.Clear();
         switch (_stream.Peek()) {
             case -1:
                 return (null, false);
             case '"':
-                _sb.Append((char)_stream.Read());
-                foreach (var ch in ReadQuotedColumn()) { _sb.Append(ch); }
+                ReadQuotedColumn(removeEnclosingQuotes);
                 return (_sb.ToString(), !TryFinishLine());
             default:
-                foreach (var ch in ReadNonQuotedColumn()) { _sb.Append(ch); }
+                ReadNonQuotedColumn();
                 return (_sb.ToString(), !TryFinishLine());
         }
     }
 
-    private IEnumerable<char> ReadQuotedColumn() {
+    private void ReadQuotedColumn(bool removeEnclosingQuotes) {
+        _stream.Read();  // Remove the quote from the stream
+        if (!removeEnclosingQuotes) {
+            _sb.Append('"');  // Optionally keep the quote in the result
+        }
         while (true) {
             var ch = _stream.Read();
             var lookAheadChar = _stream.Peek();
@@ -66,28 +66,30 @@ public class SmallestCSVParser
                 case ('"', '"'):
                     // A "" is an escaped "
                     _stream.Read();
-                    yield return '"';
+                    _sb.Append('"');
                     break;
                 case ('"', _):
                     // A " followed by any other char means we're at the end
-                    yield return '"';
-                    yield break;
+                    if (!removeEnclosingQuotes) {
+                        _sb.Append('"');
+                    }
+                    return;
                 default:
-                    yield return (char)ch;
+                    _sb.Append((char)ch);
                     break;
             }
         }
     }
 
-    private IEnumerable<char> ReadNonQuotedColumn() {
+    private void ReadNonQuotedColumn() {
         while (true) {
             var ch = _stream.Peek();
             // We aren't consuming the '\r' here. A later call to ReadWithNormalizedNewlines will consume it.
             if (ch == -1 || ch == '\r' || ch == '\n' || ch == ',') {
-                yield break;
+                return;
             }
             _stream.Read();
-            yield return (char)ch;
+            _sb.Append((char)ch);
         }
     }
 
