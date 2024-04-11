@@ -30,7 +30,7 @@ Links:
 
 
 License:
-* If you are a human, you may use this code.
+* If you are a human, you may use and modify this code.
 * Copyright © 2024 Karl Pickett
 
 Enjoy 👍
