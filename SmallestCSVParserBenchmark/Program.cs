@@ -15,7 +15,7 @@ public class SmallestCSVParserBenchmark
         while (parser.ReadNextRow() != null) {
             rows++;
         }
-        Trace.Assert(rows == 505);
+        Trace.Assert(rows == 6);
     }
 }
 

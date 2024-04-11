@@ -15,4 +15,10 @@
     <ProjectReference Include="..\SmallestCSVParser\SmallestCSVParser.csproj" />
   </ItemGroup>
 
+   <ItemGroup>
+    <Content Include="*.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
