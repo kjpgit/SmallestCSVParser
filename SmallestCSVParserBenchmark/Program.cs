@@ -19,9 +19,9 @@ public class SmallestCSVParserBenchmark
     }
 
     [Benchmark]
-    public void ReadCSV2() {
+    public void ReadCSV_1_0() {
         using var sr = new StreamReader("performance1.csv");
-        var parser = new SmallestCSVParser2(sr);
+        var parser = new SmallestCSVParser_1_0(sr);
         var rows = 0;
         while (parser.ReadNextRow() != null) {
             rows++;

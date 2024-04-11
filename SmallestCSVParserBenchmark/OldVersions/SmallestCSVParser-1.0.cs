@@ -5,13 +5,13 @@ using System.Text;
 namespace SmallestCSV;
 
 
-public class SmallestCSVParserOrig
+public class SmallestCSVParser_1_0
 {
     public class Error: Exception {
         public Error(string message): base(message) { }
     }
 
-    public SmallestCSVParserOrig(StreamReader stream) {
+    public SmallestCSVParser_1_0(StreamReader stream) {
         _stream = stream;
         _sb = new();
     }
