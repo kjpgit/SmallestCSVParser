@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 using Sm
