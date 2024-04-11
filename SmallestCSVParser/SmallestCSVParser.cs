@@ -1,5 +1,4 @@
 // SmallestCSVParser version 1.1 - Copyright (C) 2024 Karl Pickett
-using System.Diagnostics;
 using System.Text;
 
 namespace SmallestCSV;
