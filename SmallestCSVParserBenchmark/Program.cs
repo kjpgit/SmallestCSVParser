@@ -1,36 +1,28 @@
+using System.Diagnostics;
 using System;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
-using Sm
+using SmallestCSV;
 
-namespace MyBenchmarks
+
+public class SmallestCSVParserBenchmark
 {
-    public class Md5VsSha256
-    {
-        private const int N = 10000;
-        private readonly byte[] data;
-
-        private readonly SHA256 sha256 = SHA256.Create();
-        private readonly MD5 md5 = MD5.Create();
-
-        public Md5VsSha256()
-        {
-            data = new byte[N];
-            new Random(42).NextBytes(data);
+    [Benchmark]
+    public void ReadCSV() {
+        using var sr = new StreamReader("performance1.csv");
+        var parser = new SmallestCSVParser(sr);
+        var rows = 0;
+        while (parser.ReadNextRow() != null) {
+            rows++;
         }
-
-        [Benchmark]
-        public byte[] Sha256() => sha256.ComputeHash(data);
-
-        [Benchmark]
-        public byte[] Md5() => md5.ComputeHash(data);
+        Trace.Assert(rows == 505);
     }
+}
 
-    public class Program
+public class Program
+{
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            var summary = BenchmarkRunner.Run<Md5VsSha256>();
-        }
+        var summary = BenchmarkRunner.Run<SmallestCSVParserBenchmark>();
     }
 }
