@@ -83,7 +83,7 @@ public class SmallestCSVParser
     private void ReadNonQuotedColumn() {
         while (true) {
             var ch = _stream.Peek();
-            // We aren't consuming the '\r' here. A later call to ReadWithNormalizedNewlines will consume it.
+            // We aren't consuming the '\r' here. A later call to ReadWithNormalizedNewline will consume it.
             if (ch == -1 || ch == '\r' || ch == '\n' || ch == ',') {
                 return;
             }
