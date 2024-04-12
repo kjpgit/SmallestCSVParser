@@ -68,8 +68,7 @@ public class SmallestCSVParserTest
     [TestMethod]
     public void TestErrorQuoteEOF() {
         string data = "\"this_field_is_not_terminated_by_quote";
-        using var mem = new MemoryStream(Encoding.UTF8.GetBytes(data));
-        using var sr = new StreamReader(mem);
+        using var sr = streamReaderFromString(data);
         var parser = new SmallestCSVParser(sr);
         var e = Assert.ThrowsException<SmallestCSVParser.Error>(() => parser.ReadNextRow());
         Assert.AreEqual("EOF reached inside quoted column", e.Message);
@@ -78,8 +77,7 @@ public class SmallestCSVParserTest
     [TestMethod]
     public void TestErrorUnknownChar() {
         string data = "\"this_field_has_garbage_after\" ";
-        using var mem = new MemoryStream(Encoding.UTF8.GetBytes(data));
-        using var sr = new StreamReader(mem);
+        using var sr = streamReaderFromString(data);
         var parser = new SmallestCSVParser(sr);
         var e = Assert.ThrowsException<SmallestCSVParser.Error>(() => parser.ReadNextRow());
         Assert.AreEqual("Unrecognized character ' ' after a parsed column", e.Message);
@@ -88,8 +86,7 @@ public class SmallestCSVParserTest
     [TestMethod]
     public void TestEOFAfterField() {
         string data = "abc,this_is_terminated_by_eof";
-        using var mem = new MemoryStream(Encoding.UTF8.GetBytes(data));
-        using var sr = new StreamReader(mem);
+        using var sr = streamReaderFromString(data);
 
         var parser = new SmallestCSVParser(sr);
         var columns = parser.ReadNextRow();
@@ -98,6 +95,12 @@ public class SmallestCSVParserTest
         Assert.AreEqual("abc", columns[0]);
         Assert.AreEqual("this_is_terminated_by_eof", columns[1]);
         Assert.IsNull(parser.ReadNextRow());
+    }
+
+    private StreamReader streamReaderFromString(string data) {
+        // The StreamReader when disposed, will also dispose the memory stream
+        var mem = new MemoryStream(Encoding.UTF8.GetBytes(data));
+        return new StreamReader(mem);
     }
 
     private void printRow(int rowNum, List<string> columns) {
