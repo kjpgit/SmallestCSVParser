@@ -6,26 +6,30 @@ namespace SmallestCSV;
 
 public class SmallestCSVParser
 {
-    /* This is thrown if the CSV has invalid syntax. */
+    /// <summary>
+    /// This is thrown if the CSV has invalid syntax.
+    /// </summary>
     public class Error: Exception {
         public Error(string message): base(message) { }
     }
 
-    /* This class does not Close/Dispose the `stream`. */
+    /// <summary>
+    /// This class does not Close/Dispose the `stream`.
+    /// </summary>
     public SmallestCSVParser(StreamReader stream) {
         _stream = stream;
         _sb = new();
     }
 
-    /*
-      Read all columns for the next row/line.
-      If we are at end of file, this returns null.
-
-      By default, columns that were quoted (") have their enclosing quotes
-      removed.  Set `removeEnclosingQuotes` to false if you want to preserve
-      the quotes, for example to distinguish between an empty quoted vs
-      unquoted column.
-    */
+    /// <summary>
+    /// Read all columns for the next row/line.
+    /// If we are at end of file, this returns null.
+    ///
+    /// By default, columns that were quoted (") have their enclosing quotes
+    /// removed.  Set `removeEnclosingQuotes` to false if you want to preserve
+    /// the quotes, for example to distinguish between an empty quoted vs
+    /// unquoted column.
+    /// </summary>
     public List<string>? ReadNextRow(bool removeEnclosingQuotes=true) {
         List<string> ret = new();
         while (true) {
