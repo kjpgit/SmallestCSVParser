@@ -9,7 +9,7 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
 
     <PackageId>SmallestCSVParser</PackageId>
-    <Version>1.1.1-pre1</Version>
+    <Version>1.1.1</Version>
     <Authors>Karl Pickett</Authors>
     <PackageTags>CSV,Utilities</PackageTags>
     <PackageProjectUrl>https://github.com/kjpgit/SmallestCSVParser/</PackageProjectUrl>
