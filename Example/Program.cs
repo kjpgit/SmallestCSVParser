@@ -4,12 +4,12 @@ using var sr = new StreamReader("test1.csv");
 
 var parser = new SmallestCSV.SmallestCSVParser(sr);
 
-// Set this to true if you don't care about preserving the quotes around fields.
-// (Sometimes that is used to distinguish a null vs empty field.)
-const bool removeEnclosingQuotes=false;
+// Set this to true (the default) if you don't want to preserve double quotes around fields.
+// Set this to false if you need to distinguish a null (,,) vs empty string (,"",) field.
+const bool removeEnclosingQuotes = true;
 
 while (true) {
-    List<string>? columns = parser.ReadNextRow(removeEnclosingQuotes:removeEnclosingQuotes);
+    List<string>? columns = parser.ReadNextRow(removeEnclosingQuotes: removeEnclosingQuotes);
     if (columns == null) {
         Console.WriteLine("End of file reached");
         break;
