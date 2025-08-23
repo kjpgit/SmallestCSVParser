@@ -44,7 +44,7 @@ Install the [NuGet Package](https://www.nuget.org/packages/SmallestCSVParser) vi
 ## Performance
 
 According to [CsharpCSVBench](https://github.com/lemire/CsharpCSVBench/tree/master), SmallestCSVParser 1.2.0 gets 75% the performance of
-CsvHelper, with only 1% of the lines of code (100 versus 9700), and a simpler API .
+CsvHelper, with only 1% of the lines of code (100 versus [9700](https://github.com/JoshClose/CsvHelper/tree/master/src/CsvHelper)), and a simpler API .
 Choose your tradeoff.
 
 ```
