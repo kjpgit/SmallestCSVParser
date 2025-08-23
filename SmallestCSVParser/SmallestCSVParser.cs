@@ -1,4 +1,4 @@
-// SmallestCSVParser version 1.1.1 - Copyright (C) 2024 Karl Pickett
+// SmallestCSVParser version 1.2.0 - Copyright (C) 2024-2025 Karl Pickett
 using System.Text;
 
 namespace SmallestCSV;
@@ -65,21 +65,22 @@ public class SmallestCSVParser
         }
         while (true) {
             int ch = _stream.Read();
-            int lookAheadChar = _stream.Peek();
-            switch (ch, lookAheadChar) {
-                case (-1, _):
+            switch (ch) {
+                case -1:
                     throw new Error("EOF reached inside quoted column");
-                case ('"', '"'):
-                    // A "" is an escaped ". Keep it and continue.
-                    _stream.Read();
-                    _sb.Append('"');
-                    break;
-                case ('"', _):
-                    // A non-escaped ". We're done with this column.
-                    if (!removeEnclosingQuotes) {
+                case '"':
+                    if (_stream.Peek() == '"') {
+                        // A "" is an escaped ". Keep it and continue.
+                        _stream.Read();
                         _sb.Append('"');
+                        break;
+                    } else {
+                        // A non-escaped ". We're done with this column.
+                        if (!removeEnclosingQuotes) {
+                            _sb.Append('"');  // Optionally keep the quote in the result
+                        }
+                        return;
                     }
-                    return;
                 default:
                     _sb.Append((char)ch);
                     break;

@@ -28,6 +28,17 @@ public class SmallestCSVParserBenchmark
         }
         Trace.Assert(rows == 32);
     }
+
+    [Benchmark]
+    public void ReadCSV_1_1() {
+        using var sr = new StreamReader("performance1.csv");
+        var parser = new SmallestCSVParser_1_1(sr);
+        var rows = 0;
+        while (parser.ReadNextRow() != null) {
+            rows++;
+        }
+        Trace.Assert(rows == 32);
+    }
 }
 
 public class Program

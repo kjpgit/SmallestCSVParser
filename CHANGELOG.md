@@ -1,3 +1,7 @@
+## 1.2.0
+
+* Performance: Only Peek() if we read a quote char. (10% speedup)
+
 ## 1.1.1
 
 * Documentation: Use XML comments, ensure they are in NuGet package.
