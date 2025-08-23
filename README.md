@@ -1,6 +1,6 @@
 # World's Smallest CSV Parser (C#)
 
-This is a CSV (RFC4180) Parser in 100 LOC.
+This is a CSV ([RFC4180](https://www.rfc-editor.org/rfc/rfc4180)) Parser in 100 LOC.
 
 It does not give you spaghetti abstractions like other libraries.  The API is
 simply this:
