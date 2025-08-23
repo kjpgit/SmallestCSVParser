@@ -63,8 +63,8 @@ public class SmallestCSVParser
             _sb.Append('"');  // Optionally keep the quote in the result
         }
         while (true) {
-            var ch = _stream.Read();
-            var lookAheadChar = _stream.Peek();
+            int ch = _stream.Read();
+            int lookAheadChar = _stream.Peek();
             switch (ch, lookAheadChar) {
                 case (-1, _):
                     throw new Error("EOF reached inside quoted column");
@@ -88,7 +88,7 @@ public class SmallestCSVParser
 
     private void ReadNonQuotedColumn() {
         while (true) {
-            var ch = _stream.Peek();
+            int ch = _stream.Peek();
             // We aren't consuming the '\r' here. A later call to ReadWithNormalizedNewline will consume it.
             if (ch == -1 || ch == '\r' || ch == '\n' || ch == ',') {
                 return;
@@ -111,7 +111,7 @@ public class SmallestCSVParser
     }
 
     private bool TryFinishLine() {
-        var ch = ReadWithNormalizedNewline();
+        int ch = ReadWithNormalizedNewline();
         switch (ch) {
             case -1:
             case '\n':
