@@ -41,6 +41,16 @@ Unicode and emojis (surrogate pairs) are fully supported.  The Unicode encoding
 Install the [NuGet Package](https://www.nuget.org/packages/SmallestCSVParser) via:
 `dotnet add package SmallestCSVParser`
 
+## Performance
+
+According to [CsharpCSVBench](https://github.com/lemire/CsharpCSVBench/tree/master), SmallestCSVParser 1.2.0 gets you 75% the performance of
+CsvHelper, with only 1% of the lines of code (100 vs 9700), and a simpler API .
+Choose your tradeoff.
+
+> | CsvHelper         | 33.270 ms | 0.0961 ms | 0.0802 ms |  0.354       | 18266.48 KB |
+> | SmallestCSVParser | 44.026 ms | 0.1987 ms | 0.1859 ms |  0.268       | 55299.09 KB |
+
+
 ## License
 
 * If you are a human, you may use and modify this code.
