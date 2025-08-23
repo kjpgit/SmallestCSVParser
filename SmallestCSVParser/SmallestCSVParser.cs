@@ -57,6 +57,7 @@ public class SmallestCSVParser
         }
     }
 
+    // A quoted column ends with a non-escaped quote (").
     private void ReadQuotedColumn(bool removeEnclosingQuotes) {
         _stream.Read();  // Remove the quote from the stream
         if (!removeEnclosingQuotes) {
@@ -69,12 +70,12 @@ public class SmallestCSVParser
                 case (-1, _):
                     throw new Error("EOF reached inside quoted column");
                 case ('"', '"'):
-                    // A "" is an escaped "
+                    // A "" is an escaped ". Keep it and continue.
                     _stream.Read();
                     _sb.Append('"');
                     break;
                 case ('"', _):
-                    // A " followed by any other char means we're at the end
+                    // A non-escaped ". We're done with this column.
                     if (!removeEnclosingQuotes) {
                         _sb.Append('"');
                     }
@@ -86,6 +87,7 @@ public class SmallestCSVParser
         }
     }
 
+    // A non-quoted column ends with a newline, comma, or EOF.
     private void ReadNonQuotedColumn() {
         while (true) {
             int ch = _stream.Peek();
@@ -98,7 +100,8 @@ public class SmallestCSVParser
         }
     }
 
-    // Maps ('\r', '\n', '\r\n') -> '\n'
+    // Consume and return the next char from the stream, or return EOF.
+    // Maps ('\r', '\n', '\r\n') -> '\n'.
     private int ReadWithNormalizedNewline() {
         int ret = _stream.Read();
         if (ret == '\r') {
