@@ -58,6 +58,6 @@ Choose your tradeoff.
 
 * If you are a human, you may use and modify this code.
 
-* Copyright © 2024 Karl Pickett
+* Copyright © 2024-2025 Karl Pickett
 
 Enjoy 👍
