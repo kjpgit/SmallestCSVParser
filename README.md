@@ -23,7 +23,8 @@ headers having the same name, and/or headers with empty names that are expected
 to inherit the previous header's name), or mapping "NA" and "N/A" to null, etc.,
 which is very far outside the scope of RFC4180.
 
-Unicode and emojis (surrogate pairs) are fully supported.
+Unicode and emojis (surrogate pairs) are fully supported.  The Unicode encoding
+(UTF8, etc.) is fully under your control, and is handled by the StreamReader you pass in.
 
 ## Links
 
