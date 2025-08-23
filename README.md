@@ -23,13 +23,15 @@ headers having the same name, and/or headers with empty names that are expected
 to inherit the previous header's name), or mapping "NA" and "N/A" to null, etc.,
 which is very far outside the scope of RFC4180.
 
-## Links
+Unicode and emojis (surrogate pairs) are fully supported.
 
-* [Unit Tests](SmallestCSVParserTests/UnitTest1.cs)
+## Links
 
 * [World's Smallest Parser](SmallestCSVParser/SmallestCSVParser.cs)
 
 * [Example Usage Program](Example/Program.cs)
+
+* [Unit Tests](SmallestCSVParserTests/UnitTest1.cs)
 
 * [Changelog](CHANGELOG.md)
 
