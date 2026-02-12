@@ -33,7 +33,7 @@ public class SmallestCSVParser
     public List<string>? ReadNextRow(bool removeEnclosingQuotes=true) {
         List<string> ret = new();
         while (true) {
-            var (column, hasMore) = ReadNextColumn(removeEnclosingQuotes);
+            (string? column, bool hasMore) = ReadNextColumn(removeEnclosingQuotes);
             if (column != null) {
                 ret.Add(column);
             }
